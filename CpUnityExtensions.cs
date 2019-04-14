@@ -20,7 +20,7 @@ namespace cpGames.core
         #endregion
     }
 
-    public static class Utils
+    public static class CpUnityExtensions
     {
         #region Methods
         public static Transform FindOrAddChild(this Transform transform, string name)
@@ -150,18 +150,16 @@ namespace cpGames.core
             Quaternion rotation,
             Vector3 scale) where T : Component
         {
-            var go = Object.Instantiate(prefab);
+            var gob = Object.Instantiate(prefab, parent?.transform);
 
-            if (go != null && parent != null)
+            if (gob != null && parent != null)
             {
-                var t = go.transform;
-                t.SetParent(parent.transform);
-
+                var t = gob.transform;
                 t.localPosition = position;
                 t.localRotation = rotation;
                 t.localScale = scale;
             }
-            return go;
+            return gob;
         }
 
         public static T AddChild<T>(this GameObject parent,
@@ -169,18 +167,17 @@ namespace cpGames.core
             Quaternion rotation,
             Vector3 scale) where T : Component
         {
-            var go = new GameObject(typeof(T).Name);
+            var gob = new GameObject(typeof(T).Name);
 
             if (parent != null)
             {
-                var t = go.transform;
+                var t = gob.transform;
                 t.SetParent(parent.transform);
-
                 t.localPosition = position;
                 t.localRotation = rotation;
                 t.localScale = scale;
             }
-            return go.AddComponent<T>();
+            return gob.AddComponent<T>();
         }
 
         public static T AddChild<T>(this GameObject parent, T prefab) where T : Component
