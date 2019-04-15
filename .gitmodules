@@ -1,0 +1,3 @@
+[submodule "CpCodeExtensions"]
+	path = CpCodeExtensions
+	url = https://github.com/cpgames/CpCodeExtensions.git
