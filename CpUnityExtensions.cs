@@ -108,6 +108,11 @@ namespace cpGames.core
             return sceneName;
         }
 
+        public static string GetSceneName<T>()
+        {
+            return GetSceneName(typeof(T));
+        }
+
         public static bool LoadLevelAdditive<T>()
         {
             return LoadLevelAdditive(typeof(T));
